@@ -1,0 +1,30 @@
+<form #CreateForm="ngForm" (ngSubmit)="submitData(CreateForm.value)">
+  <div class="main">
+   
+    <div class="input-fields">
+      <input name="title" ngModel placeholder="Title" id="title" type="text" class="input-field" />
+    </div>
+
+    <div class="input-fields">
+      <input name="description" ngModel placeholder="Description" id="description" type="text" class="input-field" />
+    </div>
+
+    <div class="input-fields">
+      <input name="year" ngModel placeholder="Prix" id="year" type="text" class="input-field" />
+    </div>
+
+  <div>
+    <label for="lastName">first Name:</label>
+    <input type="text" id="name"   name="firstName"  ngModel required>
+  </div>
+
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="name"   name="lastName"  ngModel required>
+  </div>
+
+
+    <button>create Data </button>
+  </div>
+</form>
+<!-- {{movie.title|json}} -->

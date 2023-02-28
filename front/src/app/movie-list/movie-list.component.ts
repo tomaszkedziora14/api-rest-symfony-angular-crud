@@ -34,9 +34,9 @@ export class MovieListComponent implements OnInit {
     console.log(id)
   }
 
-  bookDetails(id: number){
-    this.router.navigate(['detail', id]);
-  }
+  // MovieDetails(id: number){
+  //   this.router.navigate(['detail', id]);
+  // }
 
   EditMovie(id: number){
     this.router.navigate(['edit', id]);

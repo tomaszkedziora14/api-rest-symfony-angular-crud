@@ -134,44 +134,82 @@ class MovieController extends AbstractController
               return new JsonResponse(['status' => 'Movie created!'], 200);
     }
 
-
     /**
-     * @Route("/update/{id}", name="movie_edit", methods = {"GET","POST"})
+     * @Route("/edit/{id}", name="movie_put", methods = {"GET","POST"})
      */
-    public function update(ManagerRegistry $doctrine, Request $request, $id): JsonResponse
+    public function edit(ManagerRegistry $doctrine, Request $request,Movie $movie): JsonResponse
     {
         $entityManager = $doctrine->getManager();
 
-        $movie = $this->movieRepository->find($id);
         foreach($movie->getActors() as $actor){
         }
 
         $params = json_decode($request->getContent(), true);
 
-            if (!isset($params["title"]) 
-                || !isset($params["description"]) 
-                || !isset($params["year"]) 
-                || !isset($params["actors"]['firstName'])
-                || !isset($params["actors"]['lastName'] )
-               ) 
-            {
-                return new JsonResponse(null, 400, ["Content-Type" => "application/json"]);
-            }
+        if (!isset($params["title"])
+            || !isset($params["description"])
+            || !isset($params["year"])
+            || !isset($params["actors"]['firstName'])
+            || !isset($params["actors"]['lastName'] )
+        )
+        {
+            return new JsonResponse(null, 400, ["Content-Type" => "application/json"]);
+        }
 
-            $actor->setFirstName($params["actors"]['firstName']);
-            $actor->setLastName($params["actors"]['lastName']);
+        $actor->setFirstName($params["actors"]['firstName']);
+        $actor->setLastName($params["actors"]['lastName']);
 
-            $movie->setTitle($params["title"]);
-            $movie->setDescription($params["description"]);
-            $movie->setMoveYear($params["year"]);
-            $movie->addActor($actor);
+        $movie->setTitle($params["title"]);
+        $movie->setDescription($params["description"]);
+        $movie->setMoveYear($params["year"]);
+        $movie->addActor($actor);
 
-            $entityManager->persist($actor);
-            $entityManager->persist($movie);
-            $entityManager->flush(); 
+        $entityManager->persist($actor);
+        $entityManager->persist($movie);
+        $entityManager->flush();
 
-            return new JsonResponse(['status' => 'Movie created!'], 200);
+        return new JsonResponse(['status' => 'Movie update!'], 200);
     }
+
+
+
+//    /**
+//     * @Route("/update/{id}", name="movie_edit", methods = {"GET","POST"})
+//     */
+//    public function update(ManagerRegistry $doctrine, Request $request, $id): JsonResponse
+//    {
+//        $entityManager = $doctrine->getManager();
+//
+//        $movie = $this->movieRepository->find($id);
+//        foreach($movie->getActors() as $actor){
+//        }
+//
+//        $params = json_decode($request->getContent(), true);
+//
+//            if (!isset($params["title"])
+//                || !isset($params["description"])
+//                || !isset($params["year"])
+//                || !isset($params["actors"]['firstName'])
+//                || !isset($params["actors"]['lastName'] )
+//               )
+//            {
+//                return new JsonResponse(null, 400, ["Content-Type" => "application/json"]);
+//            }
+//
+//            $actor->setFirstName($params["actors"]['firstName']);
+//            $actor->setLastName($params["actors"]['lastName']);
+//
+//            $movie->setTitle($params["title"]);
+//            $movie->setDescription($params["description"]);
+//            $movie->setMoveYear($params["year"]);
+//            $movie->addActor($actor);
+//
+//            $entityManager->persist($actor);
+//            $entityManager->persist($movie);
+//            $entityManager->flush();
+//
+//            return new JsonResponse(['status' => 'Movie update!'], 200);
+//    }
 
     /**
      * @Route("/delete/{id}", name="movie_delete", methods={"DELETE"})

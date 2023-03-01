@@ -29,7 +29,7 @@ export class MovieService {
   }
 
   updateMovie(Movie: any, id: number): Observable<Object> {
-    return this.http.post(`http://localhost:8098/api2/update/${id}`, Movie);
+    return this.http.post(`http://localhost:8098/api2/edit/${id}`, Movie);
   }
 
   deleteMovie(id: string): Observable<any> {

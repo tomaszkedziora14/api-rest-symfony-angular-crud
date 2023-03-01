@@ -38,7 +38,7 @@ class MovieController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine,MovieRepository $movieRepository): JsonResponse
     {
-        $movies = $doctrine->getRepository(Movie::class)->findAll();
+        $movies = $this->movieRepository->findAll();
 
             foreach ($movies as $movie) {
                 $movieData = [
@@ -164,8 +164,7 @@ class MovieController extends AbstractController
         $movie->setMoveYear($params["year"]);
         $movie->addActor($actor);
 
-        $entityManager->persist($actor);
-        $entityManager->persist($movie);
+       
         $entityManager->flush();
 
         return new JsonResponse(['status' => 'Movie update!'], 200);

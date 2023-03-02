@@ -218,6 +218,6 @@ class MovieController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->remove($movie);
             $entityManager->flush();
-            return new JsonResponse(['status' => 'Book delete!'], 200); 
+            return new JsonResponse(['status' => 'Movie delete!'], 200); 
     }
 }

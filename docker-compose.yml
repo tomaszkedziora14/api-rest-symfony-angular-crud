@@ -40,9 +40,7 @@ services:
       - 33061:3306
     environment:
       MYSQL_ROOT_PASSWORD: rootroot
-      MYSQL_DATABASE: api
-    volumes:
-      - ./docker/backup/mysql/api.sql:/docker-entrypoint-initdb.d/api.sql 
+      MYSQL_DATABASE: api 
   node:
     build: ./docker/node
     ports:
